@@ -11,8 +11,15 @@ class ApplicationsController < ApplicationController
 
   def create
     application = Application.create!(app_params)
-    redirect_to "/applications/#{application.id}"
+
+    if application.save
+      redirect_to "/applications/#{application.id}"
+    else 
+      redirect_to "/applications/new"
+      flash[:alert] = "Error: #{error_message(shelter.errors)}"
+    end
   end
+
   private
 
   def app_params
