@@ -27,7 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_19_023231) do
     t.string "applicant"
     t.string "address"
     t.string "description"
-    t.string "status"
+    t.string "status", default: "In Progress", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
