@@ -39,15 +39,14 @@ RSpec.describe "applications/show" do
       ben = Application.create!(applicant: "Ben", address: "2303 East West Drive, Denver, CO 80205", description: "I have a roof")
 
       visit "/applications/#{ben.id}"
-save_and_open_page
+
       fill_in("search", with: "Scooby")
       click_on "Search"
-save_and_open_page
+
       expect(page).to have_button("Adopt this Pet")
       click_button "Adopt this Pet"
       expect(current_path).to eq("/applications/#{ben.id}")
       expect(page).to have_content("Pets on this Application: Scooby")
-    save_and_open_page
     end
   end
 end
