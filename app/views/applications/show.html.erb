@@ -3,6 +3,21 @@
   <p>Address: <%= @application.address %></p>
   <p>Why you? <%= @application.description %></p>
   <% @application.pets.each do |pet|%>
-    <p>Pet Name: <%= pet.name%></p>
+    <p>Pets on this Application: <%= link_to pet.name, "/pets/#{pet.id}" %></p>
   <% end %>
   <p>Application Status: <%= @application.status %></p>
+
+  <section id="add_pet-<%= @application.id %>">
+    <h2>Add a Pet to this Applications</h2>
+    <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |f| %>
+      <%= f.label :search, "Search for a Pet by name!" %><br>
+      <%= f.text_field :search %>
+      <%= f.submit "Search" %>
+    <% end %>
+
+    <% if @pets != nil %>
+    <% @pets.each do |pet| %>
+      <%= link_to pet.name, "/pets/#{pet.id}" %>
+      <% end %>
+    <% end %>
+  </section>
