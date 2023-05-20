@@ -25,9 +25,14 @@ class ApplicationsController < ApplicationController
 
   def update
     application = Application.find(params[:id])
-    pet = Pet.find(params[:pet_id])
-    # application.pets << pet
-    ApplicationPet.create(application_id: application.id, pet_id: pet.id)
+    if params[:good_owner] == nil
+      pet = Pet.find(params[:pet_id])
+      ApplicationPet.create(application_id: application.id, pet_id: pet.id)
+      # application.pets << pet
+    else
+      application.update(status: "Pending")
+      application.save 
+    end
     redirect_to "/applications/#{application.id}"
   end
 
