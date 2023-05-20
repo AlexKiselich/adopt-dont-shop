@@ -49,7 +49,6 @@ RSpec.describe "applications/show" do
       expect(current_path).to eq("/applications/#{ben.id}")
       expect(page).to have_content("Pets on this Application: Scooby")
     end
-
 # 6. Submit an Application
     it "allows me to submit an application and changes the status to pending" do
       shelter = Shelter.create!(name: "Mystery Building", city: "Irvine CA", foster_program: false, rank: 9)

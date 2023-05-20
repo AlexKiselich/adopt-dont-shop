@@ -41,6 +41,4 @@ class ApplicationsController < ApplicationController
   def app_params
     params.permit(:applicant, :address, :description, :status)
   end
-  
 end
-
