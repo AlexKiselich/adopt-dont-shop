@@ -24,11 +24,13 @@
   </section>
   <% end %>
 
-  <section id="submit_application-<%= @application.id %>">
+  <% if @application.pets != [] %>
+    <section id="submit_application-<%= @application.id %>">
     <h2>Submit Application</h2>
     <%= form_with url: "/applications/#{@application.id}", method: :patch, local: true do |form| %>
     <%= form.label :good_owner, "Why I would make a good owner for these pet(s)" %>
     <%= form.text_field :good_owner, required: true %><br>
     <%= button_to "Submit Application", action: "update", :good_owner => @application.description %>
     <% end %>
-  </section>
+    </section>
+  <% end %>
