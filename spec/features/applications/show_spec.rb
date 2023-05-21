@@ -82,7 +82,7 @@ RSpec.describe "applications/show" do
       ben = Application.create!(applicant: "Ben", address: "2303 East West Drive, Denver, CO 80205", description: "I have a roof")
       
       visit "/applications/#{ben.id}"
-save_and_open_page
+
       expect(page).to_not have_content("Pets on this Application")
       expect(page).to_not have_content("Submit Application")
       expect(page).to_not have_content("Why I would make a good owner for these pet(s)")
