@@ -76,7 +76,7 @@ RSpec.describe "applications/show" do
       expect(page).to have_content("Pets on this Application: Scrappy")
       expect(page).to_not have_content("Add a Pet to this Application")
     end
-    
+
 # 7. No Pets on an Application
     it "will not allow me to submit an application if there are no pets on the application" do 
       shelter = Shelter.create!(name: "Mystery Building", city: "Irvine CA", foster_program: false, rank: 9)
@@ -103,7 +103,6 @@ RSpec.describe "applications/show" do
       visit "/applications/#{ben.id}"
       fill_in("search", with: "Scoob")
       click_on "Search"
-      click_button "Adopt this Pet"
 
       expect(page).to have_content(pet.name)
       expect(page).to have_content(pet3.name)
