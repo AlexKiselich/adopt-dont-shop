@@ -89,8 +89,27 @@ RSpec.describe "applications/show" do
       expect(page).to_not have_content("Submit Application")
       expect(page).to_not have_content("Why I would make a good owner for these pet(s)")
     end
+    
+# 8. Partial Matches for Pet Names
+    it "returns partial matches to a pet search" do
+      shelter = Shelter.create!(name: "Mystery Building", city: "Irvine CA", foster_program: false, rank: 9)
+      pet = Pet.create!(name: "Scooby", age: 2, breed: "Great Dane", adoptable: true, shelter_id: shelter.id)
+      pet2 = Pet.create!(name: "Scrappy", age: 1, breed: "Poodle", adoptable: true, shelter_id: shelter.id)
+      pet3 = Pet.create!(name: "Scoobster", age: 3, breed: "Golden Retriever", adoptable: true, shelter_id: shelter.id)
+      pet4 = Pet.create!(name: "Scoob-a-loob-a-ding-dong", age: 4, breed: "Labrador Retriever", adoptable: true, shelter_id: shelter.id)
+      pet5 = Pet.create!(name: "Here We Go Scooby-loo", age: 5, breed: "Great Dane", adoptable: true, shelter_id: shelter.id)
+      ben = Application.create!(applicant: "Ben", address: "2303 East West Drive, Denver, CO 80205", description: "I have a roof")
 
-# 9. Case Insensitive Matches for Pet Names
+      visit "/applications/#{ben.id}"
+      fill_in("search", with: "Scoob")
+      click_on "Search"
+      expect(page).to have_content(pet.name)
+      expect(page).to have_content(pet3.name)
+      expect(page).to have_content(pet4.name)
+      expect(page).to have_content(pet5.name)
+      expect(page).to_not have_content(pet2.name)
+      
+      # 9. Case Insensitive Matches for Pet Names
     it "returns case insensitive matches to a pet search" do 
       shelter = Shelter.create!(name: "Mystery Building", city: "Irvine CA", foster_program: false, rank: 9)
       pet = Pet.create!(name: "Scooby", age: 2, breed: "Great Dane", adoptable: true, shelter_id: shelter.id)
