@@ -108,6 +108,7 @@ RSpec.describe "applications/show" do
       expect(page).to have_content(pet4.name)
       expect(page).to have_content(pet5.name)
       expect(page).to_not have_content(pet2.name)
+    end
       
       # 9. Case Insensitive Matches for Pet Names
     it "returns case insensitive matches to a pet search" do 
