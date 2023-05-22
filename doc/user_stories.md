@@ -142,7 +142,7 @@ Then I do not see a section to submit my application
 These stories emphasize key database concepts.
 
 ```
-[ ] done
+[x] done
 
 8. Partial Matches for Pet Names
 
@@ -154,7 +154,7 @@ For example, if I search for "fluff", my search would match pets with names "flu
 ```
 
 ```
-[ ] done
+[x] done
 
 9. Case Insensitive Matches for Pet Names
 
@@ -166,7 +166,7 @@ For example, if I search for "fluff", my search would match pets with names "Flu
 ```
 
 ```
-[ ] done
+[x] done
 
 SQL Only Story
 
@@ -180,7 +180,7 @@ Then I see all Shelters in the system listed in reverse alphabetical order by na
 ```
 
 ```
-[ ] done
+[x] done
 
 For this story, you should fully leverage ActiveRecord methods in your query.
 
@@ -233,11 +233,25 @@ And instead I see an indicator next to the pet that they have been rejected
 
 As a visitor
 When there are two applications in the system for the same pet
+->lg: pet show page?? How can we see/test for one pet having two applications linked to them? 
+
 When I visit the admin application show page for one of the applications
+->lg: visit"/admin/applications/:id1"
+
 And I approve or reject the pet for that application
+
+->lg: click_button "Reject"
+
 When I visit the other application's admin show page
+->lg: visit"/admin/applications/:id2"
+
 Then I do not see that the pet has been accepted or rejected for that application
+->lg: expect(page).to_not have_content("Application Accepted")
+      expect(page).to_not have_content("Application Rejected")
+
 And instead I see buttons to approve or reject the pet for this specific application
+->lg: expect(page).to have_button("Accept")
+      expect(page).to have_button("Reject")
 ```
 
 ---
