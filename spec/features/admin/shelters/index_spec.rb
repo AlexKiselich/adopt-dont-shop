@@ -16,9 +16,6 @@ RSpec.describe "the admin shelters index" do
     ApplicationPet.create!(pet: @mr_pirate, application: @sarah)
     ApplicationPet.create!(pet: @clawdia, application: @simon)
     ApplicationPet.create!(pet: @lucille_bald, application: @ben)
-
-
-
   end
 
   # 10. Admin Shelters Index
@@ -29,23 +26,13 @@ RSpec.describe "the admin shelters index" do
     expect(@shelter_3.name).to appear_before(@shelter_1.name)
   end
 
-  #   For this story, you should fully leverage ActiveRecord methods in your query.
-
-  # As a visitor
-  # When I visit the admin shelter index ('/admin/shelters')
-  # Then I see a section for "Shelters with Pending Applications"
-  # And in this section I see the name of every shelter that has a pending application
+  # 11. Shelters with Pending Applications
   it "displays a section for 'Shelters with Pending Applications', and shows the name of every shelter with pending applications" do
-    
     visit "/admin/shelters"
-
-
-
     
     within "#pending_apps" do
       expect(page).to have_content(@shelter_1.name)
       expect(page).to_not have_content(@shelter_2.name)
-      save_and_open_page
     end
   end
 end

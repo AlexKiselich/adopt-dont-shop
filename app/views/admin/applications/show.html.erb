@@ -1,0 +1,14 @@
+<h1>Show Applications</h1>
+  <p>Applicant Name: <%= @application.applicant %></p>
+  <p>Address: <%= @application.address %></p>
+  <p>Why you? <%= @application.description %></p>
+
+  <% @pets.each do |pet|%>
+    <div id="app_status-<%= pet.id %>">
+    <p>Pets on this Application: <%= link_to pet.name, "/pets/#{pet.id}" %> 
+    <% if @application.status != "Approved" %>
+      <p><%= button_to "Approve", action: "update" %></p>
+      </div>
+    <% end %>
+  <% end %>
+  <p>Application Status: <%= @application.status %></p>
