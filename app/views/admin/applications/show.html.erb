@@ -6,9 +6,9 @@
   <% @pets.each do |pet|%>
     <div id="app_status-<%= pet.id %>">
     <p>Pets on this Application: <%= link_to pet.name, "/pets/#{pet.id}" %> 
-    <% if @application.status != "Approved" %>
-      <p><%= button_to "Approve", action: "update" %></p>
-      </div>
+    <% if @application.status == ("In Progress" || "Pending") %>
+      <p><%= button_to "Reject", action: "reject" %></p>
+    </div>
     <% end %>
   <% end %>
   <p>Application Status: <%= @application.status %></p>

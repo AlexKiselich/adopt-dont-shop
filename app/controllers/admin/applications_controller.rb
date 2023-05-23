@@ -11,4 +11,11 @@ class Admin::ApplicationsController < ApplicationController
     application.save 
     redirect_to "/admin/applications/#{application.id}"
   end
+
+  def reject 
+    application = Application.find(params[:id])
+    application.update(status: "Rejected")
+    application.save 
+    redirect_to "/admin/applications/#{application.id}"
+  end
 end
