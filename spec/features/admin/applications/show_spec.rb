@@ -5,17 +5,14 @@ RSpec.describe "admin applications show page" do
   # 12. Approving a Pet for Adoption
     it "has a button to approve a pet" do 
       shelter = Shelter.create!(name: "Mystery Building", city: "Irvine CA", foster_program: false, rank: 9)
-      mr_pirate = shelter.pets.create(name: "Mr. Pirate", breed: "tuxedo shorthair", age: 5, adoptable: true)
-      @clawdia = shelter.pets.create(name: "Clawdia", breed: "shorthair", age: 3, adoptable: true)
-      lucille_bald = shelter.pets.create(name: "Lucille Bald", breed: "sphynx", age: 8, adoptable: true)
-      @sarah = mr_pirate.applications.create!(applicant: "Sarah", address: "123 Sesame Street, Denver, CO 80212", description: "I am cool")
-      ben = lucille_bald.applications.create!(applicant: "Ben", address: "2303 East West Drive, Denver, CO 80205", description: "I have a roof")
-      ApplicationPet.create!(pet: @clawdia, application: @sarah)
-      
+      @mr_pirate = shelter.pets.create(name: "Mr. Pirate", breed: "tuxedo shorthair", age: 5, adoptable: true)
+      @sarah = @mr_pirate.applications.create!(applicant: "Sarah", address: "123 Sesame Street, Denver, CO 80212", description: "I am cool")
+            
       visit "/admin/applications/#{@sarah.id}"
+      expect(page).to have_content("Application Status: In Progress")
       expect(page).to have_button("Approve")
 
-      within "#app_status-#{@clawdia.id}" do
+      within "#app_status-#{@mr_pirate.id}" do
         click_on "Approve"
       end
       
@@ -36,11 +33,12 @@ RSpec.describe "admin applications show page" do
       ben = Application.create!(applicant: "Ben", address: "2303 East West Drive, Denver, CO 80205", description: "I have a roof")
 
       visit "/admin/applications/#{ben.id}"
+      expect(page).to have_content("Application Status: In Progress")
       expect(page).to have_button("Reject")
       click_button "Reject"
 
       visit "/admin/applications/#{ben.id}"
-      expect(page).to have_content("Application Rejected")
+      expect(page).to have_content("Application Status: Rejected")
       expect(page).to_not have_button("Reject")
 # test for an equal number of pets and Reject buttons?
 # test for Application Rejected message beside the pet?
