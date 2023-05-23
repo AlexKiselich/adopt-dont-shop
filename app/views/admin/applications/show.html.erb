@@ -6,8 +6,11 @@
   <% @pets.each do |pet|%>
     <div id="app_status-<%= pet.id %>">
     <p>Pets on this Application: <%= link_to pet.name, "/pets/#{pet.id}" %> 
-    <% if @application_pet.ap_status == ("Pending") %> 
-      <p><%= button_to "Approve", action: "update", :ap_id => @application_pet.id %></p>
+    <% if @pet_applications.ap_status == ("Pending") %> 
+      <p><%= button_to "Approve", action: "update", :accept => @pet_applications.id %></p>
+      <p><%= button_to "Reject", action: "update", :reject => @pet_applications.id %></p>
+    <% elsif @pet_applications.ap_status == ("Rejected") %>
+      <p>Pet Application Status: Rejected</p>
     <% else %>
       <p>Pet Application Status: Approved</p>
     </div>
