@@ -14,6 +14,7 @@ RSpec.describe "applications/show" do
       expect(page).to have_content("123 Sesame Street, Denver, CO 80212")
       expect(page).to have_content("I am cool")
       expect(page).to have_content("Scooby")
+      # expect(page).to have_link("/pets/#{pet.id}")
       expect(page).to have_content("In Progress")
     end
 

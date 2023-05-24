@@ -49,7 +49,6 @@ RSpec.describe "admin applications show page" do
       clawdia = shelter.pets.create!(name: "Clawdia", breed: "tuxedo shorthair", age: 5, adoptable: true)
       simon = clawdia.applications.create!(applicant: "Simon", address: "123 Sesame Street, Denver, CO 80212", description: "I am cool")
       erin = clawdia.applications.create!(applicant: "Erin", address: "2303 East West Drive, Denver, CO 80205", description: "I have a roof")
-# pet show page?? How can we see/test for one pet having two applications linked to them? 
 
       visit "/admin/applications/#{simon.id}"
 
