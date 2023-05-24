@@ -21,6 +21,4 @@ class Admin::ApplicationsController < ApplicationController
     application.save 
     redirect_to "/admin/applications/#{application.id}"
   end
-
 end
-

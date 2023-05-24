@@ -29,8 +29,6 @@ RSpec.describe Shelter, type: :model do
     ApplicationPet.create!(pet: @pet_1, application: @sarah)
     ApplicationPet.create!(pet: @pet_2, application: @simon)
     ApplicationPet.create!(pet: @pet_3, application: @ben)
-
-
   end
 
   describe "class methods" do
