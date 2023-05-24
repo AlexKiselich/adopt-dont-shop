@@ -3,17 +3,32 @@
   <p>Address: <%= @application.address %></p>
   <p>Why you? <%= @application.description %></p>
 
-  <% @pets.each do |pet|%>
-    <div id="app_status-<%= pet.id %>">
-    <p>Pets on this Application: <%= link_to pet.name, "/pets/#{pet.id}" %> 
-    <% if @pet_applications.ap_status == ("Pending") %> 
-      <p><%= button_to "Approve", action: "update", :accept => @pet_applications.id %></p>
-      <p><%= button_to "Reject", action: "update", :reject => @pet_applications.id %></p>
-    <% elsif @pet_applications.ap_status == ("Rejected") %>
+<% @pet_applications.each do |pet_app| %>
+  <div id="app_status-<%= pet_app.id %>">
+    <p>Pets on this Application: pet_app.pet.name</p>
+    <% if pet_app.ap_status == ("Pending") %> 
+      <p><%= button_to "Approve", action: "update", :approve => pet_app.id %></p>
+      <p><%= button_to "Reject", action: "update", :reject => pet_app.id %></p>
+    <% elsif pet_app.ap_status == ("Rejected") %>
       <p>Pet Application Status: Rejected</p>
     <% else %>
       <p>Pet Application Status: Approved</p>
     </div>
     <% end %>
   <% end %>
-  <p>Application Status: <%= @application.status %></p>
+  <p>Application Status: <%= @application.status %></p
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
