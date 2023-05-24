@@ -12,7 +12,6 @@ RSpec.describe "admin applications show page" do
 
       expect(page).to have_content("Application Status: In Progress")
       expect(page).to have_button("Approve")
-
     
       click_on "Approve"
     
@@ -26,7 +25,7 @@ RSpec.describe "admin applications show page" do
       @clawdia = shelter.pets.create!(name: "Clawdia", breed: "shorthair", age: 3, adoptable: true)      
       @sarah = Application.create!(applicant: "Sarah", address: "123 Sesame Street, Denver, CO 80212", description: "I am cool")
 
-      @pet_app1 = ApplicationPet.create!(pet: @mr_pirate, application: @sarah)
+      ApplicationPet.create!(pet: @mr_pirate, application: @sarah)
       ApplicationPet.create!(pet: @clawdia, application: @sarah)
 
       visit "/admin/applications/#{@sarah.id}"
@@ -36,6 +35,7 @@ RSpec.describe "admin applications show page" do
         expect(page).to_not have_button("Approve")
         expect(page).to_not have_button("Reject")
       end
+      
       within "#app_status-#{@mr_pirate.id}" do
         expect(page).to have_button("Approve")
         expect(page).to have_button("Reject")
