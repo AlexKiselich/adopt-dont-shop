@@ -7,30 +7,32 @@
   <% end %>
   <p>Application Status: <%= @application.status %></p>
 
-  <% if @application.status == "In Progress" %>
   <section id="add_pet-<%= @application.id %>">
+    <% if @application.status == "In Progress" %>
     <h2>Add a Pet to this Application</h2>
-    <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |f| %>
+      <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |f| %>
       <%= f.label :search, "Search for a Pet by name!" %><br>
       <%= f.text_field :search %>
       <%= f.submit "Search" %>
-    <% end %>
+      <% end %>
+    <% end%>
 
     <% if @pets != nil %>
     <% @pets.each do |pet| %>
-      <%= link_to pet.name, "/pets/#{pet.id}" %><%= button_to "Adopt this Pet", action: "update", :pet_id => pet.id %>
+      <%= pet.name %>
+      <%= button_to "Adopt this Pet", "/applications/#{@application.id}?search=#{pet.name}", method: :patch  %>
       <% end %>
     <% end %>
   </section>
-  <% end %>
 
-  <% if @application.pets != [] %>
-    <section id="submit_application-<%= @application.id %>">
-    <h2>Submit Application</h2>
-    <%= form_with url: "/applications/#{@application.id}", method: :patch, local: true do |form| %>
-    <%= form.label :good_owner, "Why I would make a good owner for these pet(s)" %>
-    <%= form.text_field :good_owner, required: true %><br>
-    <%= button_to "Submit Application", action: "update", :good_owner => @application.description %>
-    <% end %>
-    </section>
+
+<section id="submit_application-<%= @application.id %>">
+  <% if @application.pets != [] && @application.status != "Pending" %>
+      <h2>Submit Application</h2>
+      <%= form_with url: "/applications/#{@application.id}?status=Pending", method: :patch, local: true do |form| %>
+      <%= form.label :good_owner, "Why I would make a good owner for these pet(s)" %>
+      <%= form.text_field :good_owner, required: true %><br>
+      <%= form.submit "Submit Application" %>
+      <% end %>
   <% end %>
+</section>

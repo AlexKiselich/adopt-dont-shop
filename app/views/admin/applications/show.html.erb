@@ -4,8 +4,8 @@
   <p>Why you? <%= @application.description %></p>
 
 <% @pet_applications.each do |pet_app| %>
-  <div id="app_status-<%= pet_app.id %>">
-    <p>Pets on this Application: pet_app.pet.name</p>
+  <div id="app_status-<%= pet_app.pet.id %>">
+    <p>Pets on this Application: <%= pet_app.pet.name %></p>
     <% if pet_app.ap_status == ("Pending") %> 
       <p><%= button_to "Approve", action: "update", :approve => pet_app.id %></p>
       <p><%= button_to "Reject", action: "update", :reject => pet_app.id %></p>

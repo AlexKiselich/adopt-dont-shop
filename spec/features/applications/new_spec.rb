@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe '#new' do
   describe 'When I visit the application new page' do
+  #2. Starting an Application
     it 'displays a form for a new adoption' do
       shelter = Shelter.create(name: "Mystery Building", city: "Irvine CA", foster_program: false, rank: 9)
       pet = Pet.create(name: "Scooby", age: 2, breed: "Great Dane", adoptable: true, shelter_id: shelter.id)
@@ -35,6 +36,7 @@ RSpec.describe '#new' do
       end
     end
 
+  # 3. Starting an Application, Form not Completed
     context "given invalid data" do
       it "when I fail to fill in any of the form fields it takes me back" do
         shelter = Shelter.create(name: "Mystery Building", city: "Irvine CA", foster_program: false, rank: 9)

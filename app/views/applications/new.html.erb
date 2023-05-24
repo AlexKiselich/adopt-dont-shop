@@ -1,6 +1,6 @@
 <h1>Adoption Application</h1>
 
-<%= form_with url: "/applications", method: :post, local: true do |form| %>
+<%= form_with method: :post, local: true do |form| %>
 <%= form.label :applicant, "Name" %>
 <%= form.text_field :applicant, required: true %><br>
 <%= form.label :address %>
